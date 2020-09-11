@@ -62,15 +62,7 @@ module.exports = {
                 // console.log("en resolver", context.req.token);
                 const user = await User.findByCredentials(input.email, input.password);
                 const token = await user.generateAuthToken();
-                // console.log(token, "kljlj");
-                // console.log("43153125432");
-                // document.cookie = token;
-                // context.res.document.cookie = token;
-                // localStorage.setItem("token", token);
-                // context.res.header("auth", token);
-                // context.res.header("SDD", "SDasdASDasdAD");
-                // console.log(context.res);
-                // document.cookie = `ann=${token}`;
+               
                 context.res.cookie("token", token, {
                     // httpOnly: true,
                     // secure: false,
@@ -112,15 +104,6 @@ module.exports = {
             }
         },
 
-        // addcontact: async (obj, { input }, context) => {
-        //     try {
-        //         const user = context.req.user;
-        //         user.contacts.push({ contid: input.email });
-        //         console.log(user);
-        //         return user;
-        //     } catch (e) {
-        //         throw new ApolloError("fail to add contact", 678);
-        //     }
-        // },
+      
     },
 };

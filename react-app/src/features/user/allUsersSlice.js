@@ -9,6 +9,9 @@ const allUsersSlice = createSlice({
       // console.log("inSlice");
       return users;
     },
+    addAllUsers(state, action) {
+      state.push(action.payload);
+    },
     resetAllUsers(state) {
       state = [];
       return state;
@@ -16,6 +19,10 @@ const allUsersSlice = createSlice({
   },
 });
 
-export const { setallusers, resetAllUsers } = allUsersSlice.actions;
+export const {
+  setallusers,
+  resetAllUsers,
+  addAllUsers,
+} = allUsersSlice.actions;
 
 export default allUsersSlice.reducer;

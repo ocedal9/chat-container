@@ -38,7 +38,7 @@ module.exports = {
                 // const emisorId = userId;
                 // console.log(noti, emisorId);
 
-                io.of("/dashboard").to(input.target).emit("reqserver", noti);
+                io.of("/notisock").to(input.target).emit("reqserver", noti);
                 return Notification;
             } catch (e) {
                 throw new ApolloError("fail no create notification", 555);

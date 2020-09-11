@@ -4,7 +4,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_ROOM } from "../graphql/mutations";
-import { socket, socketn } from "../views/dashboard";
+import { socket } from "../views/dashboard";
+import { socketn } from "../views/SignUp";
 
 export default function MCgroup() {
   const state = useSelector((state) => state);

@@ -18,6 +18,8 @@ services:
         image: mongo
         ports:
             - "27017:27017"
+
+
     contacts:
         container_name: contacts
         restart: always
@@ -35,6 +37,8 @@ services:
         image: mongo
         ports:
             - "27018:27017"
+
+
     conversations:
         container_name: conversations
         restart: always
@@ -52,6 +56,8 @@ services:
         image: mongo
         ports:
             - "27019:27017"
+
+
     notifications:
         container_name: notifications
         restart: always
@@ -69,6 +75,8 @@ services:
         image: mongo
         ports:
             - "27020:27017"
+
+
     react-app:
         container_name: react-app
         restart: always
@@ -82,6 +90,7 @@ services:
             - ./react-app:/app
         
         stdin_open: true
+
         
     gateway:
         container_name: gateway
@@ -104,6 +113,7 @@ services:
             - contacts
             - notifications
       
+            
     nginx:
         depends_on:
             - react-app

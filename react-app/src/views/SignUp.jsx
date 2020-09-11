@@ -24,9 +24,12 @@ import { ADD_USER } from "../graphql/mutations";
 import { useDispatch } from "react-redux";
 import { isAuth } from "../features/auth/authSlice";
 import { setuser } from "../features/user/userSlice";
-// import { AuthContext } from "../utils/Auth";
-// import { isAuth } from "features/auth/authSlice";
-// const mapDispatch = { isAuth };
+import io from "socket.io-client";
+
+export const socketn = io("http://localhost:8000/notisock", {
+  path: "/notisock/socket.io",
+  forceNew: true,
+});
 
 function Copyright() {
   return (
@@ -91,6 +94,7 @@ export function SignUp() {
     onCompleted(data) {
       dispatch(setuser(data.newUser));
       dispatch(isAuth());
+      socketn.emit("adduser", data.newUser);
     },
   });
   // console.log("in sign up", data, loading, error);

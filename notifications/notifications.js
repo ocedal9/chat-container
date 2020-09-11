@@ -9,8 +9,8 @@ const { idbytoken } = require("./model");
 const port = 4003;
 
 var http = require("http").createServer(app);
-var io = require("socket.io")(http, { path: "/dashboard" });
-io.of("/dashboard").on("connection", (socketn) => {
+var io = require("socket.io")(http, { path: "/notisock/socket.io" });
+io.of("/notisock").on("connection", (socketn) => {
     socketn.on("disconnect", () => {
         console.log("user disconnected");
     });
@@ -23,17 +23,21 @@ io.of("/dashboard").on("connection", (socketn) => {
     });
     socketn.on("accepted", (msg) => {
         // console.log("friend socjet", msg);
-        io.of("/dashboard").to(msg.roomId).emit("addcon", msg);
+        io.of("/notisock").to(msg.roomId).emit("addcon", msg);
     });
     socketn.on("roomsocket", (msg) => {
         // console.log("ROOM socket", msg);
-        io.of("/dashboard").to(msg.roomToJoin).emit("addroom", msg);
+        io.of("/notisock").to(msg.roomToJoin).emit("addroom", msg);
     });
     socketn.on("grouproom", (msg) => {
         // console.log("in group RRROOO<M", msg.members);
         for (const member of msg.members) {
-            io.of("/dashboard").to(member).emit("newgroup", msg);
+            io.of("/notisock").to(member).emit("newgroup", msg);
         }
+    });
+    socketn.on("adduser", (msg) => {
+        // console.log("in server", msg);
+        socketn.broadcast.emit("broadcast", msg);
     });
 });
 

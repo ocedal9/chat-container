@@ -24,7 +24,7 @@ const server = new ApolloServer({
     context: async ({ res, req }) => {
         // console.log("in auth context");
 
-        res.header("Access-Control-Allow-Origin", "http://localhost:4000");
+        res.header("Access-Control-Allow-Origin", "http://localhost:8000");
 
         const tokenBearer = req.headers.auth || "";
         // console.log(req.headers.auth);

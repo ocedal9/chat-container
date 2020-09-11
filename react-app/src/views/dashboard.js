@@ -15,27 +15,19 @@ import { GET_USERS, GET_ROOMS } from "../graphql/queries";
 // import { setcontacts } from "../features/contacts/contactsSlice";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { setallusers } from "../features/user/allUsersSlice";
+import { setallusers, addAllUsers } from "../features/user/allUsersSlice";
 import { pushnoti } from "../features/notifications/notiSlice";
 import { setRooms, addRoom } from "../features/rooms/roomsSlice";
 import io from "socket.io-client";
 import { addcontact } from "../features/contacts/contactsSlice";
+import { socketn } from "./SignUp";
 
-export const socket = io("http://localhost:8000");
-// console.log(socket);
-socket.on("connect", (data) => {
-  // console.log("socket id", socket.id);
+export const socket = io("http://localhost:8000/convsock", {
+  path: "/convsock/socket.io",
 });
-
-export const socketn = io("http://localhost:8000/dashboard", {
-  path: "/dashboard",
-});
-// console.log(socketn);
-socketn.on("connect", (data) => {
-  // console.log("socket id", socketn.id);
-});
-// import io from "socket.io-client";
-// const socket = io.connect("ws://localhost:4003");
+// export const socket = io.connect("http://localhost:8000", {
+// path: "/convsock/socket.io",
+// });
 
 const darktheme = createMuiTheme({
   palette: {
@@ -113,17 +105,24 @@ export default function Dashboard() {
 
   const { loading, error } = useQuery(GET_USERS, {
     onCompleted(data) {
-      // console.log(data);
+      // console.log("refetching", data);
       dispatch(setallusers(data.getallusers));
     },
+    fetchPolicy: "no-cache",
   });
-  // const [asdf] = useLazyQuery(GET_USERS, {
-  //   onCompleted(data) {
-  //     console.log("siiiiiiiiiii");
-  //     dispatch(setallusers(data.getallusers));
-  //   },
-  // });
-  // asdf();
+
+  useEffect(() => {
+    const listener = (msg) => {
+      // console.log("where i want", msg);
+      // updateQuery();
+      dispatch(addAllUsers(msg));
+    };
+    socketn.on("broadcast", listener);
+    return () => {
+      socketn.off("broadcast", listener);
+    };
+  }, []);
+
   useEffect(() => {
     const listener = (msg) => {
       // emisorId = msg.contact;
@@ -191,8 +190,8 @@ export default function Dashboard() {
 
   // console.log("getting rooms", data1, loading1, error1);
 
-  if (loading) return "Loading...";
-  if (error) return `Error! ${error.message}`;
+  // if (loading) return "Loading...";
+  // if (error) return `Error! ${error.message}`;
 
   return (
     // <UsersContext.Provider value={usarray}>

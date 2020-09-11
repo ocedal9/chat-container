@@ -9,7 +9,7 @@ import { GET_ROOMS } from "../graphql/queries";
 import { Link } from "react-router-dom";
 import { deleteNoti } from "../features/notifications/notiSlice";
 import { addcontact } from "../features/contacts/contactsSlice";
-import { socketn } from "../views/dashboard";
+import { socketn } from "../views/SignUp";
 // import { GET_CONTACTS, GET_USERS } from "../graphql/queries";
 // import { pushnoti } from "../features/notifications/notiSlice";
 // import { setallusers } from "../features/user/allUsersSlice";

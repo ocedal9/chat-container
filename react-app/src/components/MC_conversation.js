@@ -159,7 +159,7 @@ export default function MCchatbox(props) {
   useEffect(() => {
     const listener = (msg) => {
       const msgCom = msg;
-
+      // console.log(msg);
       const owner2 = state.allusers.find((element) => element.id === msg.owner);
 
       msgCom.ownerNick = owner2.nickname;

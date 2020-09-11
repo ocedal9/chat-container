@@ -10,39 +10,25 @@ const port = 4004;
 const { UserRoom } = require("./model");
 
 var http = require("http").createServer(app);
-var io = require("socket.io")(http);
-io.on("connection", (socket) => {
-    // console.log(`${socket.id} has join`);
+var io = require("socket.io")(http, {path: "/convsock/socket.io"});
+io.of("/convsock").on("connection", (socket) => {
     socket.on("disconnect", () => {
-        // console.log("user disconnected");
     });
     socket.on("roomsReq", async (msg) => {
         const id = msg;
-        // console.log("idbytoken", id);
-        // console.log("id desde socket", msg);
         const roomsObj = await UserRoom.find({ userId: id });
-        // console.log("roonssssssObj", roomsObj);
         const roomsArray = [];
         for (const roomObj of roomsObj) {
             roomsArray.push(roomObj.roomId);
         }
-        // console.log("rooms array de ids", roomsArray);
         socket.join(roomsArray, () => {
             const rooms = Object.keys(socket.rooms);
-            // console.log("room in join", rooms);
-            // io.to("5f4846c7c7b46f0af76dd022").emit("msgfromserver", `conected to room`);
         });
-        // io.to("5f4846c7c7b46f0af76dd022").emit("a", "desde room");
     });
     socket.on("message", (msg) => {
-        // console.log("onmessage", msg.msg.roomId);
-        io.to(msg.msg.roomId).emit("msgserver", msg.msg);
-        // socket.emit("msgserver", msg.msg);
+        io.of("/convsock").to(msg.msg.roomId).emit("msgserver", msg.msg);
     });
-    // socket.on("grouproom", (msg) => {
-    //     console.log("in group RRROOO<M", msg.id);
-    //     io.to(msg.id).emit("newgroup", msg);
-    // });
+   
 });
 
 var corsOptions = {
