@@ -1,0 +1,22 @@
+{
+    "name": "notifications",
+    "version": "1.0.0",
+    "description": "",
+    "main": "notifiactions.js",
+    "scripts": {
+        "server:noti": "nodemon notifications.js",
+        "start": "node notifications.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@apollo/federation": "^0.16.8",
+        "apollo-server": "^2.15.0",
+        "apollo-server-express": "^2.15.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.9.19",
+        "socket.io": "^2.3.0"
+    }
+}

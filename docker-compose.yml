@@ -1,0 +1,117 @@
+version: "3.5"
+services:
+
+    authentication:
+        container_name: authentication
+        restart: always
+        build: ./authentication
+        ports:
+            - "4001:4001"
+        volumes:
+            - /app/node_modules
+            - ./authentication:/app
+        links:
+            - mongoAuth
+        
+    mongoAuth:
+        container_name: mongoAuth
+        image: mongo
+        ports:
+            - "27017:27017"
+    contacts:
+        container_name: contacts
+        restart: always
+        build: ./contacts
+        ports:
+            - "4002:4002"
+        volumes:
+            - /app/node_modules
+            - ./contacts:/app
+        links:
+            - mongoContacts
+           
+    mongoContacts:
+        container_name: mongoContacts
+        image: mongo
+        ports:
+            - "27018:27017"
+    conversations:
+        container_name: conversations
+        restart: always
+        build: ./conversations
+        ports:
+            - "4004:4004"
+        volumes:
+            - /app/node_modules
+            - ./conversations:/app
+        links:
+            - mongoConv
+        
+    mongoConv:
+        container_name: mongoConv
+        image: mongo
+        ports:
+            - "27019:27017"
+    notifications:
+        container_name: notifications
+        restart: always
+        build: ./notifications
+        ports:
+            - "4003:4003"
+        volumes:
+            - /app/node_modules
+            - ./notifications:/app
+        links:
+            - mongoNoti
+        
+    mongoNoti:
+        container_name: mongoNoti
+        image: mongo
+        ports:
+            - "27020:27017"
+    react-app:
+        container_name: react-app
+        restart: always
+        build: ./react-app
+        ports:
+            - "3000:3000"
+        depends_on:
+            - gateway
+        volumes:
+            - /app/node_modules
+            - ./react-app:/app
+        
+        stdin_open: true
+        
+    gateway:
+        container_name: gateway
+        restart: always
+        build: ./gateway
+        ports:
+            - "4000:4000"
+        volumes:
+            - /app/node_modules
+            - ./gateway:/app
+       
+        links:
+            - authentication
+            - conversations
+            - contacts
+            - notifications
+        depends_on:
+            - authentication
+            - conversations
+            - contacts
+            - notifications
+      
+    nginx:
+        depends_on:
+            - react-app
+            - gateway
+            - conversations
+        restart: always
+        build: ./nginx
+        ports:
+            - "8000:8000"
+        
+

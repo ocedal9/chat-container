@@ -1,0 +1,22 @@
+{
+    "name": "gateway",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "server:graphql": "nodemon server.js",
+        "start": "node server.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@apollo/gateway": "^0.16.6",
+        "apollo-server": "^2.14.4",
+        "apollo-server-express": "^2.14.4",
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "http-proxy-middleware": "^1.0.5"
+    }
+}
