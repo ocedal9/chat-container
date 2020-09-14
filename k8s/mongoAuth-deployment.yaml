@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongoauth-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongoauth
+  template:
+    metadata:
+      labels:
+        app: mongoauth
+    spec:
+      containers:
+      - image: mongo
+        name: mongoauth
+        # ports:
+        # - name: mongoauth-port
+        #   containerPort: 27017
+        #   hostPort: 27017
+      #   volumeMounts:
+      #     - name: mongo-persistent-storage1
+      #       mountPath: /data/db
+      # volumes:
+      #   - name: mongo-persistent-storage1
+      #     persistentVolumeClaim:
+      #       claimName: mongo-pv-claim1

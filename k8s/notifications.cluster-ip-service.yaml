@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: notifications-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: nontifications
+  ports:
+    - port: 4003
+      targetPort: 4003

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notifications-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: notifications
+  template:
+    metadata:
+      labels:
+        component: notifications
+    spec:
+      containers:
+        - name: notifications
+          image: ocedal/notifications
+          ports:
+            - containerPort: 4003

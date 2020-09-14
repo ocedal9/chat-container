@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongonoti-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongonoti
+  template:
+    metadata:
+      labels:
+        app: mongonoti
+    spec:
+      containers:
+      - image: mongo
+        name: mongonoti

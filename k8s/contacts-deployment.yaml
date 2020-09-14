@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contacts-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: contacts
+  template:
+    metadata:
+      labels:
+        component: contacts
+    spec:
+      containers:
+        - name: contacts
+          image: ocedal/contacts
+          ports:
+            - containerPort: 4002

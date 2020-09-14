@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conversations-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: conversations
+  template:
+    metadata:
+      labels:
+        component: conversations
+    spec:
+      containers:
+        - name: conversations
+          image: ocedal/conversations
+          ports:
+            - containerPort: 4004

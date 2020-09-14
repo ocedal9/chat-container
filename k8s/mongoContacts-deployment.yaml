@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongocontacts-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongocontacts
+  template:
+    metadata:
+      labels:
+        app: mongocontacts
+    spec:
+      containers:
+      - image: mongo
+        name: mongocontacts

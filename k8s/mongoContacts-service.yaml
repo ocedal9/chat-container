@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongocontacts-service
+spec:
+  ports:
+    - name: contacts
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
+  selector:
+    app: mongocontacts
