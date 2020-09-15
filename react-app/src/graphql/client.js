@@ -6,7 +6,8 @@ import { HttpLink } from "apollo-link-http";
 import cookies from "cookiesjs";
 
 const httpLink = new HttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri:
+    "http://659df2aa-default-ingress-e8c7-1375635711.us-east-1.elb.amazonaws.com/graphql",
   credentials: "include",
 });
 

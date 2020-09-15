@@ -37,10 +37,10 @@ class AuthenticatedDataSource extends RemoteGraphQLDataSource {
 
 const gateway = new ApolloGateway({
     serviceList: [
-        { name: "authentication", url: "http://authentication:4001/graphql" },
-        { name: "contacts", url: "http://contacts:4002/graphql" },
-        { name: "notifications", url: "http://notifications:4003/graphql" },
-        { name: "conversations", url: "http://conversations:4004/graphql" },
+        { name: "authentication", url: "http://authentication-cluster-ip-service:4001/graphql" },
+        { name: "contacts", url: "http://contacts-cluster-ip-service:4002/graphql" },
+        { name: "notifications", url: "http://notifications-cluster-ip-service:4003/graphql" },
+        { name: "conversations", url: "http://conversations-cluster-ip-service:4004/graphql" },
     ],
     buildService({ url }) {
         return new AuthenticatedDataSource({ url });

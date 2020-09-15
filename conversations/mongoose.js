@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://mongoconv:27017/chat-app", {
+mongoose.connect("mongodb://mongoconv-service/chat-app", {
     useUnifiedTopology: true,
     useCreateIndex: true,
     useNewUrlParser: true,

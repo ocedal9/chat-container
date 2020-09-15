@@ -2,7 +2,7 @@ module.exports = {
   client: {
     service: {
       name: "chatguza",
-      url: "http://localhost:4000/graphql",
+      url: "http://gateway-cluster-ip-service/graphql",
     },
   },
 };
