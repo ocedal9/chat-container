@@ -49,7 +49,7 @@ const gateway = new ApolloGateway({
 
 var corsOptions = {
     // origin: true,
-    origin: ["http://localhost:8000"],
+    origin: ["http://659df2aa-default-ingress-e8c7-1375635711.us-east-1.elb.amazonaws.com/graphql"],
     credentials: true,
     optionsSuccessStatus: 200,
 };
@@ -61,7 +61,7 @@ const server = new ApolloServer({
     subscriptions: false,
     context: ({ res, req }) => {
         // console.log("gateway");
-        res.header("Access-Control-Allow-Origin", "http://localhost:8000");
+        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-1375635711.us-east-1.elb.amazonaws.com/graphql");
         const token = req.headers.authorization || "";
 
         return { req, res, token };
