@@ -12,6 +12,18 @@ spec:
   rules:
     - http:
         paths:
+          - path: /graphql
+            backend:
+              serviceName: "gateway-cluster-ip-service"
+              servicePort: 4000
+          - path: /convsock//socket.io/*
+            backend:
+              serviceName: "conversations-cluster-ip-service"
+              servicePort: 4004
+          - path: /notisock//socket.io/*
+            backend:
+              serviceName: "notifications-cluster-ip-service"
+              servicePort: 4003
           - path: /*
             backend:
               serviceName: "react-app-cluster-ip-service"
