@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: react-app-cluster-ip-service
 spec:
-  type: NodePort
   selector:
     component: web
   ports:

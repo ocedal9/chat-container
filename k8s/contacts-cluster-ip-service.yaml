@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: contacts-cluster-ip-service
 spec:
-  type: ClusterIP
   selector:
     component: contacts
   ports:

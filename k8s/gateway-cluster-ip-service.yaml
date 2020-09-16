@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: gateway-cluster-ip-service
 spec:
-  type: ClusterIP
   selector:
     component: gateway
   ports:
