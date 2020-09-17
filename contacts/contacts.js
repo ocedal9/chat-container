@@ -19,10 +19,9 @@ app.use(cors(corsOptions));
 
 const server = new ApolloServer({
     schema: buildFederatedSchema([{ typeDefs, resolvers }]),
-    path: "/cont/graphql",
     context: async ({ res, req }) => {
         // console.log(req);
-        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphq");
+        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphql");
 
         const tokenBearer = req.headers.auth || "";
         const token = tokenBearer.split(" ")[1];
@@ -39,5 +38,5 @@ const server = new ApolloServer({
     },
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, path: "/cont/graphql" });
 app.listen({ port }, () => console.log(`🚀 Contacts ready at http://localhost:4002${server.graphqlPath}`));

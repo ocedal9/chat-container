@@ -43,7 +43,7 @@ io.of("/notisock").on("connection", (socketn) => {
 
 var corsOptions = {
     // origin: true,
-    origin: ["http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphq"],
+    origin: ["http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphql"],
     credentials: true,
     optionsSuccessStatus: 200,
 };
@@ -52,10 +52,10 @@ app.use(cors(corsOptions));
 
 const server = new ApolloServer({
     schema: buildFederatedSchema([{ typeDefs, resolvers }]),
-    path: "/noti/graphql",
+
     context: async ({ res, req }) => {
         // console.log(req);
-        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphq");
+        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphql");
 
         const tokenBearer = req.headers.auth || "";
         const token = tokenBearer.split(" ")[1];
@@ -72,7 +72,7 @@ const server = new ApolloServer({
     },
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, path: "/noti/graphql" });
 // app.listen({ port }, () => console.log(`🚀 NOTIFICATIONS ready at http://localhost:4003${server.graphqlPath}`));
 http.listen({ port }, () => console.log(`🚀 NOTIFICATIONS ready at http://localhost:4003${server.graphqlPath}`));
 

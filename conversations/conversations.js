@@ -33,7 +33,7 @@ io.of("/convsock").on("connection", (socket) => {
 
 var corsOptions = {
     // origin: true,
-    origin: ["http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphq"],
+    origin: ["http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphql"],
     credentials: true,
     optionsSuccessStatus: 200,
 };
@@ -43,10 +43,9 @@ app.use(cors(corsOptions));
 const server = new ApolloServer({
     // path: "/conversations/graphql",
     schema: buildFederatedSchema([{ typeDefs, resolvers }]),
-    path: "/conv/graphql",
     context: async ({ res, req }) => {
         // console.log("request room");
-        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphq");
+        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphql");
         const tokenBearer = req.headers.auth || "";
         const tok = tokenBearer.split(" ")[1];
         // console.log(tok);
@@ -62,5 +61,5 @@ const server = new ApolloServer({
 
 // console.log(roomsObj);
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, path:"/conv/graphql" });
 http.listen({ port }, () => console.log(`🚀 CONVERSATIONS ready at http://localhost:4004${server.graphqlPath}`));

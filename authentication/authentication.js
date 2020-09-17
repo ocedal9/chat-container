@@ -21,7 +21,6 @@ app.use(cors(corsOptions));
 const server = new ApolloServer({
     schema: buildFederatedSchema([{ typeDefs, resolvers }]),
     // plugins: [httpHeadersPlugin],
-    path: "/auth/graphql",
     context: async ({ res, req }) => {
         // console.log("in auth context");
 
@@ -51,5 +50,5 @@ const server = new ApolloServer({
     },
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, path: "/auth/graphql" });
 app.listen({ port }, () => console.log(`🚀 AUTHENTICATION ready at http://localhost:4001${server.graphqlPath}`));

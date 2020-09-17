@@ -8,3 +8,4 @@ spec:
   ports:
     - port: 4004
       targetPort: 4004
+      protocol: TCP
