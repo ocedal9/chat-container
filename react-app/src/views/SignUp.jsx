@@ -26,10 +26,13 @@ import { isAuth } from "../features/auth/authSlice";
 import { setuser } from "../features/user/userSlice";
 import io from "socket.io-client";
 
-export const socketn = io("http://localhost:8000/notisock", {
-  path: "/notisock/socket.io",
-  forceNew: true,
-});
+export const socketn = io(
+  "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/notisock",
+  {
+    path: "/notisock/socket.io",
+    forceNew: true,
+  }
+);
 
 function Copyright() {
   return (

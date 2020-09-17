@@ -37,10 +37,10 @@ class AuthenticatedDataSource extends RemoteGraphQLDataSource {
 
 const gateway = new ApolloGateway({
     serviceList: [
-        { name: "authentication", url: "http://authentication-cluster-ip-service:4001/graphql" },
-        { name: "contacts", url: "http://contacts-cluster-ip-service:4002/graphql" },
-        { name: "notifications", url: "http://notifications-cluster-ip-service:4003/graphql" },
-        { name: "conversations", url: "http://conversations-cluster-ip-service:4004/graphql" },
+        { name: "authentication", url: "http://authentication-cluster-ip-service:4001/auth/graphql" },
+        { name: "contacts", url: "http://contacts-cluster-ip-service:4002/cont/graphql" },
+        { name: "notifications", url: "http://notifications-cluster-ip-service:4003/noti/graphql" },
+        { name: "conversations", url: "http://conversations-cluster-ip-service:4004/conv/graphql" },
     ],
     buildService({ url }) {
         return new AuthenticatedDataSource({ url });
@@ -49,7 +49,7 @@ const gateway = new ApolloGateway({
 
 var corsOptions = {
     // origin: true,
-    origin: ["http://659df2aa-default-ingress-e8c7-1375635711.us-east-1.elb.amazonaws.com/graphql"],
+    origin: ["http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphq"],
     credentials: true,
     optionsSuccessStatus: 200,
 };
@@ -61,7 +61,7 @@ const server = new ApolloServer({
     subscriptions: false,
     context: ({ res, req }) => {
         // console.log("gateway");
-        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-1375635711.us-east-1.elb.amazonaws.com/graphql");
+        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphq");
         const token = req.headers.authorization || "";
 
         return { req, res, token };

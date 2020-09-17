@@ -10,7 +10,7 @@ const port = 4002;
 
 var corsOptions = {
     // origin: true,
-    origin: ["http://localhost:4000"],
+    origin: ["http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphql"],
     credentials: true,
     optionsSuccessStatus: 200,
 };
@@ -19,9 +19,10 @@ app.use(cors(corsOptions));
 
 const server = new ApolloServer({
     schema: buildFederatedSchema([{ typeDefs, resolvers }]),
+    path: "/cont/graphql",
     context: async ({ res, req }) => {
         // console.log(req);
-        res.header("Access-Control-Allow-Origin", "http://localhost:4000");
+        res.header("Access-Control-Allow-Origin", "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/graphq");
 
         const tokenBearer = req.headers.auth || "";
         const token = tokenBearer.split(" ")[1];

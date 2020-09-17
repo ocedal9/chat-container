@@ -16,6 +16,22 @@ spec:
             backend:
               serviceName: "gateway-cluster-ip-service"
               servicePort: 4000
+          - path: /auth/graphql
+            backend:
+              serviceName: "authentication-cluster-ip-service"
+              servicePort: 4001
+          - path: /cont/graphql
+            backend:
+              serviceName: "contacts-cluster-ip-service"
+              servicePort: 4002
+          - path: /noti/graphql
+            backend:
+              serviceName: "notifications-cluster-ip-service"
+              servicePort: 4003
+          - path: /conv/graphql
+            backend:
+              serviceName: "conversations-cluster-ip-service"
+              servicePort: 4004
           - path: /convsock/socket.io/*
             backend:
               serviceName: "conversations-cluster-ip-service"

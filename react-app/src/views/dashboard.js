@@ -22,9 +22,12 @@ import io from "socket.io-client";
 import { addcontact } from "../features/contacts/contactsSlice";
 import { socketn } from "./SignUp";
 
-export const socket = io("http://localhost:8000/convsock", {
-  path: "/convsock/socket.io",
-});
+export const socket = io(
+  "http://659df2aa-default-ingress-e8c7-583114532.us-east-1.elb.amazonaws.com/convsock",
+  {
+    path: "/convsock/socket.io",
+  }
+);
 // export const socket = io.connect("http://localhost:8000", {
 // path: "/convsock/socket.io",
 // });
